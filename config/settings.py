@@ -184,3 +184,48 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Compatibilidad para django-cloudinary-storage durante collectstatic
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Corrección WhiteNoise para Render
+# Evita errores MissingFileError en collectstatic
+WHITENOISE_MANIFEST_STRICT = False
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
+STORAGES = {
+    'default': {
+        'BACKEND': 'cloudinary_storage.storage.MediaCloudinaryStorage' if USE_CLOUDINARY else 'django.core.files.storage.FileSystemStorage',
+    },
+    'staticfiles': {
+        'BACKEND': 'whitenoise.storage.CompressedStaticFilesStorage',
+    },
+}
+
+# Corrección WhiteNoise para Render
+# Evita errores MissingFileError en collectstatic
+WHITENOISE_MANIFEST_STRICT = False
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
+STORAGES = {
+    'default': {
+        'BACKEND': 'cloudinary_storage.storage.MediaCloudinaryStorage' if USE_CLOUDINARY else 'django.core.files.storage.FileSystemStorage',
+    },
+    'staticfiles': {
+        'BACKEND': 'whitenoise.storage.CompressedStaticFilesStorage',
+    },
+}
+
+# =====================================================
+# CORRECCIÓN FINAL STATICFILES PARA RENDER
+# Evita errores con archivos faltantes de Cloudinary en collectstatic
+# =====================================================
+WHITENOISE_MANIFEST_STRICT = False
+
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+
+STORAGES = {
+    'default': {
+        'BACKEND': 'cloudinary_storage.storage.MediaCloudinaryStorage' if USE_CLOUDINARY else 'django.core.files.storage.FileSystemStorage',
+    },
+    'staticfiles': {
+        'BACKEND': 'django.contrib.staticfiles.storage.StaticFilesStorage',
+    },
+}

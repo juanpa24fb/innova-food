@@ -7,3 +7,5 @@ staticfiles/
 .env
 *.bak
 *_backup.py
+
+*_backup*.py

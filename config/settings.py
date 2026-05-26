@@ -181,3 +181,6 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Campo automático por defecto
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Compatibilidad para django-cloudinary-storage durante collectstatic
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

@@ -1,0 +1,22 @@
+﻿{% extends 'tienda/base.html' %}
+
+{% block title %}{{ titulo }} - Innova Food{% endblock %}
+
+{% block content %}
+
+<section class="section">
+    <div class="form-box">
+        <h1>{{ titulo }}</h1>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <button type="submit" class="btn btn-green full">Guardar producto</button>
+        </form>
+
+        <a href="{% url 'admin_productos' %}" class="btn btn-outline full mt">Volver al inventario</a>
+    </div>
+</section>
+
+{% endblock %}

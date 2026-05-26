@@ -1,0 +1,164 @@
+﻿{% extends 'tienda/base.html' %}
+
+{% block title %}Panel Admin - Innova Food{% endblock %}
+
+{% block content %}
+
+<section class="admin-modern-page">
+    <div class="admin-bg-effect"></div>
+
+    <div class="tpl-container admin-modern-container">
+
+        <div class="admin-modern-header">
+            <div>
+                <span class="admin-chip">Panel privado · Innova Food</span>
+                <h1>Panel administrador</h1>
+                <p>
+                    Gestiona productos, pedidos, comprobantes, compradores, facturación,
+                    WhatsApp y datos de pago desde un solo lugar.
+                </p>
+            </div>
+
+            <div class="admin-user-card">
+                <span>Sesión activa</span>
+                <h2>{{ user.username }}</h2>
+                <p>Administrador del sistema</p>
+            </div>
+        </div>
+
+        <div class="admin-stats-grid">
+            <div class="admin-stat-card delay-1">
+                <div class="admin-stat-icon">📦</div>
+                <span>Inventario</span>
+                <h2>{{ total_productos }}</h2>
+                <p>Productos registrados</p>
+                <a href="{% url 'admin_productos' %}">Gestionar productos</a>
+            </div>
+
+            <div class="admin-stat-card delay-2">
+                <div class="admin-stat-icon">🧾</div>
+                <span>Ventas</span>
+                <h2>{{ total_pedidos }}</h2>
+                <p>Pedidos realizados</p>
+                <a href="{% url 'admin_pedidos' %}">Ver pedidos</a>
+            </div>
+
+            <div class="admin-stat-card delay-3">
+                <div class="admin-stat-icon">✅</div>
+                <span>Validación</span>
+                <h2>{{ pedidos_pendientes }}</h2>
+                <p>Comprobantes pendientes</p>
+                <a href="{% url 'admin_pedidos' %}">Revisar pagos</a>
+            </div>
+
+            <div class="admin-stat-card delay-4">
+                <div class="admin-stat-icon">👥</div>
+                <span>Compradores</span>
+                <h2>{{ total_usuarios }}</h2>
+                <p>Usuarios registrados</p>
+                <a href="{% url 'admin_pedidos' %}">Ver actividad</a>
+            </div>
+        </div>
+
+        <div class="admin-content-grid">
+
+            <div class="admin-payment-panel delay-5">
+                <div class="admin-panel-title">
+                    <div>
+                        <span class="admin-chip">Configuración de pagos</span>
+                        <h2>Datos para depósitos</h2>
+                    </div>
+
+                    <a href="{% url 'datos_pago' %}" class="admin-main-btn">Agregar / actualizar</a>
+                </div>
+
+                {% if datos_pago %}
+                    <div class="admin-payment-grid">
+                        <div>
+                            <small>Banco</small>
+                            <strong>{{ datos_pago.banco }}</strong>
+                        </div>
+
+                        <div>
+                            <small>Tipo de cuenta</small>
+                            <strong>{{ datos_pago.tipo_cuenta }}</strong>
+                        </div>
+
+                        <div>
+                            <small>Número de cuenta</small>
+                            <strong>{{ datos_pago.numero_cuenta }}</strong>
+                        </div>
+
+                        <div>
+                            <small>Titular</small>
+                            <strong>{{ datos_pago.titular }}</strong>
+                        </div>
+
+                        <div>
+                            <small>Identificación</small>
+                            <strong>
+                                {% if datos_pago.identificacion %}
+                                    {{ datos_pago.identificacion }}
+                                {% else %}
+                                    No registrada
+                                {% endif %}
+                            </strong>
+                        </div>
+
+                        <div>
+                            <small>WhatsApp</small>
+                            <strong>
+                                {% if datos_pago.whatsapp %}
+                                    {{ datos_pago.whatsapp }}
+                                {% else %}
+                                    No registrado
+                                {% endif %}
+                            </strong>
+                        </div>
+                    </div>
+
+                    {% if datos_pago.nota %}
+                        <div class="admin-note">
+                            <strong>Nota:</strong> {{ datos_pago.nota }}
+                        </div>
+                    {% endif %}
+                {% else %}
+                    <div class="admin-empty-box">
+                        <h3>No hay datos de pago registrados</h3>
+                        <p>
+                            Agrega la cuenta bancaria y el número de WhatsApp para que el comprador
+                            pueda pagar y comunicarse con la tienda.
+                        </p>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="admin-shortcuts delay-6">
+                <h2>Accesos rápidos</h2>
+
+                <a href="{% url 'crear_producto' %}" class="admin-shortcut-link">
+                    <span>➕</span>
+                    Agregar producto
+                </a>
+
+                <a href="{% url 'admin_productos' %}" class="admin-shortcut-link">
+                    <span>📋</span>
+                    Revisar inventario
+                </a>
+
+                <a href="{% url 'admin_pedidos' %}" class="admin-shortcut-link">
+                    <span>📦</span>
+                    Gestionar pedidos
+                </a>
+
+                <a href="{% url 'datos_pago' %}" class="admin-shortcut-link">
+                    <span>🏦</span>
+                    Datos de pago y WhatsApp
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

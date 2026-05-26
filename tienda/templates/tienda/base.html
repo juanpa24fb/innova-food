@@ -1,0 +1,102 @@
+﻿{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Innova Food{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'tienda/styles.css' %}">
+</head>
+<body>
+
+<header class="tpl-header">
+    <div class="tpl-container tpl-nav">
+        <a href="{% url 'inicio' %}" class="tpl-brand">
+            <div class="tpl-logo">IF</div>
+            <div>
+                <small>UPEC · ALIMENTOS</small>
+                <h2>INNOVA FOOD</h2>
+            </div>
+        </a>
+
+        <nav class="tpl-menu">
+            {% with page=request.resolver_match.url_name %}
+
+                {% if page == 'panel_admin' or page == 'admin_productos' or page == 'crear_producto' or page == 'editar_producto' or page == 'admin_pedidos' or page == 'datos_pago' %}
+                    <a href="{% url 'inicio' %}">INICIO</a>
+                    <a href="{% url 'panel_admin' %}">PANEL</a>
+                    <a href="{% url 'admin_productos' %}">INVENTARIO</a>
+                    <a href="{% url 'admin_pedidos' %}">PEDIDOS</a>
+                    <a href="{% url 'datos_pago' %}">DATOS DE PAGO</a>
+                    <a href="{% url 'logout' %}">SALIR</a>
+                {% else %}
+                    <a href="{% url 'inicio' %}" class="{% if page == 'inicio' %}active{% endif %}">INICIO</a>
+                    <a href="{% url 'categorias' %}" class="{% if page == 'categorias' %}active{% endif %}">CATEGORÍAS</a>
+                    <a href="{% url 'productos' %}" class="{% if page == 'productos' %}active{% endif %}">PRODUCTOS</a>
+                    <a href="{% url 'beneficios' %}" class="{% if page == 'beneficios' %}active{% endif %}">BENEFICIOS</a>
+                    <a href="{% url 'contacto' %}" class="{% if page == 'contacto' %}active{% endif %}">CONTACTO</a>
+
+                    {% if user.is_authenticated %}
+                        {% if not user.is_staff and not user.is_superuser %}
+                            <a href="{% url 'carrito' %}">CARRITO</a>
+                            <a href="{% url 'mis_pedidos' %}">MIS PEDIDOS</a>
+                        {% else %}
+                            <a href="{% url 'panel_admin' %}">PANEL ADMIN</a>
+                        {% endif %}
+                        <a href="{% url 'logout' %}">SALIR</a>
+                        <a href="{% url 'productos' %}" class="tpl-order-btn">SOLICITAR PEDIDO</a>
+                    {% else %}
+                        <a href="{% url 'login' %}">INGRESAR</a>
+                        <a href="{% url 'login' %}" class="tpl-order-btn">SOLICITAR PEDIDO</a>
+                    {% endif %}
+                {% endif %}
+
+            {% endwith %}
+        </nav>
+    </div>
+</header>
+
+<main>
+    {% if messages %}
+        <div class="tpl-container messages">
+            {% for message in messages %}
+                <div class="message">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% block content %}{% endblock %}
+</main>
+
+{% block footer %}
+<footer class="tpl-footer">
+    <div class="tpl-container footer-grid">
+        <div>
+            <h2><span>IF</span> Innova FOOD</h2>
+            <p>
+                Intermediario alimentario que conecta la producción de la Universidad
+                Politécnica Estatal del Carchi con la comunidad universitaria.
+            </p>
+        </div>
+
+        <div>
+            <h3>LÍNEAS DE PRODUCTO</h3>
+            <p>Fermentados · Lácteos</p>
+            <p>Cárnicos · Panificación</p>
+            <p>Mermeladas · Frutas secas</p>
+        </div>
+
+        <div>
+            <h3>CONTACTO</h3>
+            <p>Tulcán, Ecuador</p>
+            <p>contacto@innovafood.ec</p>
+            <p>+593 123 456 789</p>
+            <p>Lunes a Viernes · 08:00 - 17:00</p>
+        </div>
+    </div>
+</footer>
+{% endblock %}
+
+<script src="{% static 'tienda/animations.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+﻿<svg width="1600" height="900" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="g1" cx="25%" cy="25%" r="55%">
+      <stop offset="0%" stop-color="#1cff8a" stop-opacity="0.28"/>
+      <stop offset="45%" stop-color="#0b5c33" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#020806" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="g2" cx="80%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#5df7a5" stop-opacity="0.20"/>
+      <stop offset="60%" stop-color="#06351f" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#020806" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="line" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#5df7a5" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.02"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="#020806"/>
+  <rect width="1600" height="900" fill="url(#g1)"/>
+  <rect width="1600" height="900" fill="url(#g2)"/>
+
+  <g opacity="0.14">
+    <path d="M80 760 C280 590, 400 720, 580 520 S900 310, 1130 440 S1390 650, 1540 450" fill="none" stroke="url(#line)" stroke-width="3"/>
+    <path d="M120 190 C300 330, 520 140, 730 260 S1020 430, 1240 260 S1430 160, 1540 260" fill="none" stroke="url(#line)" stroke-width="2"/>
+  </g>
+
+  <g opacity="0.13">
+    <circle cx="230" cy="690" r="70" fill="#5df7a5"/>
+    <circle cx="1320" cy="620" r="95" fill="#5df7a5"/>
+    <circle cx="1180" cy="190" r="55" fill="#ffffff"/>
+    <circle cx="430" cy="210" r="45" fill="#ffffff"/>
+  </g>
+
+  <g opacity="0.18" fill="#5df7a5">
+    <text x="120" y="120" font-size="38" font-family="Arial" font-weight="900">INNOVA FOOD</text>
+    <text x="120" y="168" font-size="18" font-family="Arial" letter-spacing="5">PANEL ADMINISTRADOR</text>
+  </g>
+
+  <g opacity="0.12">
+    <rect x="1010" y="110" width="420" height="260" rx="32" fill="#5df7a5"/>
+    <rect x="1035" y="135" width="370" height="42" rx="18" fill="#020806"/>
+    <rect x="1035" y="205" width="280" height="34" rx="15" fill="#020806"/>
+    <rect x="1035" y="265" width="330" height="34" rx="15" fill="#020806"/>
+  </g>
+</svg>

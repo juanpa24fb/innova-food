@@ -1,0 +1,56 @@
+﻿{% extends 'tienda/base.html' %}
+
+{% block title %}Carrito - Innova Food{% endblock %}
+
+{% block content %}
+
+<section class="section">
+    <div class="container">
+        <h2 class="section-title">Carrito de compras</h2>
+
+        {% if items %}
+            <div class="table-box">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Presentación</th>
+                            <th>Cantidad</th>
+                            <th>Precio</th>
+                            <th>Subtotal</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for item in items %}
+                            <tr>
+                                <td>{{ item.producto.nombre }}</td>
+                                <td>{{ item.producto.presentacion }}</td>
+                                <td>{{ item.cantidad }}</td>
+                                <td>${{ item.producto.precio }}</td>
+                                <td>${{ item.subtotal }}</td>
+                                <td>
+                                    <a href="{% url 'quitar_carrito' item.producto.id %}" class="btn btn-red">Quitar</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="total-box">
+                <h2>Total: <span>${{ total }}</span></h2>
+                <a href="{% url 'finalizar_compra' %}" class="btn btn-green mt">Finalizar compra</a>
+            </div>
+        {% else %}
+            <div class="info-card">
+                <h3>Tu carrito está vacío</h3>
+                <p>Agrega productos desde el catálogo para continuar.</p>
+                <a href="{% url 'productos' %}" class="btn btn-green mt">Ver productos</a>
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+{% endblock %}

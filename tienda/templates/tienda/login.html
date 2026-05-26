@@ -1,0 +1,30 @@
+﻿{% extends 'tienda/base.html' %}
+
+{% block title %}Ingresar - Innova Food{% endblock %}
+
+{% block content %}
+
+<section class="section">
+    <div class="form-box">
+        <h1>Iniciar sesión</h1>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <label>Usuario</label>
+            <input type="text" name="username" class="form-control" placeholder="Usuario" required>
+
+            <label>Contraseña</label>
+            <input type="password" name="password" class="form-control" placeholder="Contraseña" required>
+
+            <button type="submit" class="btn btn-green full">Ingresar</button>
+        </form>
+
+        <p class="center mt">
+            ¿No tienes cuenta?
+            <a href="{% url 'registro' %}">Regístrate aquí</a>
+        </p>
+    </div>
+</section>
+
+{% endblock %}

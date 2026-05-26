@@ -1,0 +1,53 @@
+﻿{% extends 'tienda/base.html' %}
+
+{% block title %}Subir comprobante - Innova Food{% endblock %}
+
+{% block content %}
+
+<section class="section">
+    <div class="container">
+        <h2 class="section-title">Pago del pedido #{{ pedido.id }}</h2>
+
+        <div class="grid two">
+            <div class="info-card">
+                <h3>Datos para el depósito</h3>
+
+                {% if datos_pago %}
+                    <p><strong>Banco:</strong> {{ datos_pago.banco }}</p>
+                    <p><strong>Tipo de cuenta:</strong> {{ datos_pago.tipo_cuenta }}</p>
+                    <p><strong>Número de cuenta:</strong> {{ datos_pago.numero_cuenta }}</p>
+                    <p><strong>Titular:</strong> {{ datos_pago.titular }}</p>
+
+                    {% if datos_pago.identificacion %}
+                        <p><strong>Cédula/RUC:</strong> {{ datos_pago.identificacion }}</p>
+                    {% endif %}
+
+                    {% if datos_pago.correo %}
+                        <p><strong>Correo:</strong> {{ datos_pago.correo }}</p>
+                    {% endif %}
+
+                    {% if datos_pago.nota %}
+                        <p><strong>Nota:</strong> {{ datos_pago.nota }}</p>
+                    {% endif %}
+                {% else %}
+                    <p>El administrador todavía no ha registrado los datos de pago.</p>
+                {% endif %}
+
+                <p><strong>Total a pagar:</strong> <span class="green">${{ pedido.total }}</span></p>
+            </div>
+
+            <div class="info-card">
+                <h3>Enviar comprobante</h3>
+
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+
+                    <button type="submit" class="btn btn-green full">Enviar comprobante</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

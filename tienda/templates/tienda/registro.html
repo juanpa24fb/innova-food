@@ -1,0 +1,25 @@
+﻿{% extends 'tienda/base.html' %}
+
+{% block title %}Registro - Innova Food{% endblock %}
+
+{% block content %}
+
+<section class="section">
+    <div class="form-box">
+        <h1>Crear cuenta</h1>
+
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <button type="submit" class="btn btn-green full">Registrarme</button>
+        </form>
+
+        <p class="center mt">
+            ¿Ya tienes cuenta?
+            <a href="{% url 'login' %}">Inicia sesión</a>
+        </p>
+    </div>
+</section>
+
+{% endblock %}

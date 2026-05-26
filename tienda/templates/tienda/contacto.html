@@ -1,0 +1,46 @@
+﻿{% extends 'tienda/base.html' %}
+
+{% block title %}Contacto - Innova FOOD{% endblock %}
+
+{% block content %}
+
+<section class="tpl-page">
+    <div class="tpl-container">
+        <div class="tpl-page-head">
+            <span>ESTAMOS PARA AYUDARTE</span>
+            <h1>CONTACTO</h1>
+            <p>Comunícate con Innova FOOD para pedidos, consultas y distribución dentro del entorno UPEC.</p>
+        </div>
+
+        <div class="tpl-category-grid three">
+            <div class="tpl-info-card">
+                <div class="tpl-card-icon">🛒</div>
+                <h2>TIENDA EN LÍNEA</h2>
+                <p>Innova Food funciona como una plataforma digital para solicitar productos alimenticios de forma rápida y organizada.</p>
+            </div>
+
+            <div class="tpl-info-card">
+                <div class="tpl-card-icon">📧</div>
+                <h2>CORREO</h2>
+                {% if datos_pago and datos_pago.correo %}
+                    <p>{{ datos_pago.correo }}</p>
+                {% else %}
+                    <p>contacto@innovafood.ec</p>
+                {% endif %}
+            </div>
+
+            <div class="tpl-info-card">
+                <div class="tpl-card-icon">📱</div>
+                <h2>WHATSAPP</h2>
+                {% if datos_pago and datos_pago.whatsapp %}
+                    <p>{{ datos_pago.whatsapp }}</p>
+                    <a href="{{ datos_pago.whatsapp_link }}" target="_blank" class="tpl-card-btn">INICIAR CONVERSACIÓN</a>
+                {% else %}
+                    <p>El administrador aún no ha agregado un número de WhatsApp.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

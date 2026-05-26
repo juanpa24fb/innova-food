@@ -1,0 +1,51 @@
+﻿{% extends 'tienda/base.html' %}
+
+{% block title %}Finalizar compra - Innova Food{% endblock %}
+
+{% block content %}
+
+<section class="section">
+    <div class="container">
+        <h2 class="section-title">Finalizar compra</h2>
+
+        <div class="grid two">
+            <div class="info-card">
+                <h3>Resumen del pedido</h3>
+
+                {% for producto, cantidad, subtotal in items %}
+                    <p>
+                        {{ producto.nombre }} — {{ producto.presentacion }} x {{ cantidad }}
+                        <br>
+                        <strong>${{ subtotal }}</strong>
+                    </p>
+                {% endfor %}
+
+                <h2 class="mt">Subtotal: <span class="green">${{ subtotal_general }}</span></h2>
+
+                {% if aplica_mayorista %}
+                    <p class="mt">
+                        Tu pedido tiene productos con 12 unidades o más. Si seleccionas compra al por mayor y pago a crédito,
+                        se aplicará un interés del 8%.
+                    </p>
+                {% else %}
+                    <p class="mt">
+                        Para pago a crédito mayorista, se requiere comprar 12 unidades o más de al menos un producto.
+                    </p>
+                {% endif %}
+            </div>
+
+            <div class="info-card">
+                <h3>Datos de entrega y tipo de compra</h3>
+
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+
+                    <button type="submit" class="btn btn-green full">Crear pedido</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+﻿{% extends 'tienda/base.html' %}
+
+{% block title %}Datos de pago - Innova Food{% endblock %}
+
+{% block content %}
+
+<section class="section">
+    <div class="form-box">
+        <h1>Datos de pago y WhatsApp</h1>
+
+        <p class="center">
+            Estos datos se mostrarán al comprador para realizar depósitos y también permitirán iniciar una conversación por WhatsApp.
+        </p>
+
+        <br>
+
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <button type="submit" class="btn btn-green full">Guardar datos</button>
+        </form>
+
+        <a href="{% url 'panel_admin' %}" class="btn btn-outline full mt">Volver al panel</a>
+    </div>
+</section>
+
+{% endblock %}

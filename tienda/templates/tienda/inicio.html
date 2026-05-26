@@ -1,0 +1,87 @@
+﻿{% extends 'tienda/base.html' %}
+
+{% block title %}Inicio - Innova FOOD{% endblock %}
+
+{% block footer %}{% endblock %}
+
+{% block content %}
+
+<section class="tpl-home">
+    <div class="tpl-container tpl-home-grid">
+        <div class="tpl-home-text">
+            <div class="tpl-pill">PRODUCCIÓN UPEC · VENTA DIRECTA</div>
+
+            <h1>
+                DEL CAMPO<br>
+                <span>DE LA UPEC</span><br>
+                A TU MESA
+            </h1>
+
+            <p>
+                Innova FOOD es el puente entre la finca universitaria, productores
+                aliados y la comunidad UPEC. Productos frescos, procesados con
+                calidad técnica y presentados con identidad moderna.
+            </p>
+
+            <div class="tpl-home-actions">
+                <a href="{% url 'productos' %}" class="tpl-btn-primary">EXPLORAR CATÁLOGO</a>
+                <a href="{% url 'contacto' %}" class="tpl-btn-link">CONTACTAR</a>
+            </div>
+        </div>
+
+        <div class="tpl-feature-card">
+            <div class="tpl-feature-img">
+                {% if productos and productos.0.imagen %}
+                    <img src="{{ productos.0.imagen.url }}" alt="{{ productos.0.nombre }}">
+                {% else %}
+                    <div class="tpl-no-img">Producto destacado</div>
+                {% endif %}
+            </div>
+
+            <div class="tpl-feature-info">
+                <small>
+                    {% if productos and productos.0.presentacion %}
+                        {{ productos.0.presentacion }}
+                    {% else %}
+                        NUEVO
+                    {% endif %}
+                </small>
+
+                <div class="tpl-feature-row">
+                    <h3>
+                        {% if productos and productos.0.nombre %}
+                            {{ productos.0.nombre }}
+                        {% else %}
+                            Mix Orgánico
+                        {% endif %}
+                    </h3>
+
+                    <div class="tpl-feature-price">
+                        <strong>
+                            {% if productos and productos.0.precio %}
+                                ${{ productos.0.precio }}
+                            {% else %}
+                                $2.49
+                            {% endif %}
+                        </strong>
+                        <p>
+                            {% if productos and productos.0.presentacion %}
+                                Por {{ productos.0.presentacion }}
+                            {% else %}
+                                Por unidad
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+
+                {% if productos and productos.0.id %}
+                    <a href="{% url 'agregar_carrito' productos.0.id %}" class="tpl-card-btn">AGREGAR AL PEDIDO</a>
+                {% else %}
+                    <a href="{% url 'productos' %}" class="tpl-card-btn">VER PRODUCTOS</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

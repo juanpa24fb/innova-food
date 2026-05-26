@@ -1,0 +1,48 @@
+﻿{% extends 'tienda/base.html' %}
+
+{% block title %}Inventario - Innova Food{% endblock %}
+
+{% block content %}
+
+<section class="section">
+    <div class="container">
+        <h2 class="section-title">Inventario de productos</h2>
+
+        <a href="{% url 'crear_producto' %}" class="btn btn-green">Agregar producto</a>
+
+        <div class="table-box mt">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                        <th>Disponible</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for producto in productos %}
+                        <tr>
+                            <td>{{ producto.nombre }}</td>
+                            <td>${{ producto.precio }}</td>
+                            <td>{{ producto.stock }}</td>
+                            <td>{% if producto.disponible %}Sí{% else %}No{% endif %}</td>
+                            <td>
+                                <a href="{% url 'editar_producto' producto.id %}" class="btn btn-outline">Editar</a>
+                                <a href="{% url 'eliminar_producto' producto.id %}" class="btn btn-red">Eliminar</a>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="5">No hay productos registrados.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

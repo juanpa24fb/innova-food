@@ -61,7 +61,7 @@ class DatosPago(models.Model):
     titular = models.CharField(max_length=120, verbose_name="Titular de la cuenta")
     identificacion = models.CharField(max_length=20, blank=True, verbose_name="Cédula o RUC")
     correo = models.EmailField(blank=True, verbose_name="Correo del titular")
-    whatsapp = models.CharField(max_length=20, blank=True, verbose_name="Número de WhatsApp")
+    whatsapp = models.CharField(max_length=255, blank=True, verbose_name="Número de WhatsApp")
     mensaje_whatsapp = models.TextField(
         blank=True,
         default="Hola, deseo realizar una consulta sobre Innova Food.",
@@ -142,3 +142,4 @@ class DetallePedido(models.Model):
 
     def __str__(self):
         return f"{self.producto.nombre} x {self.cantidad}"
+

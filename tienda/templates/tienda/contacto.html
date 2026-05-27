@@ -34,7 +34,7 @@
                 <h2>WHATSAPP</h2>
                 {% if datos_pago and datos_pago.whatsapp %}
                     <p>{{ datos_pago.whatsapp }}</p>
-                    <a href="{{ datos_pago.whatsapp_link }}" target="_blank" class="tpl-card-btn">INICIAR CONVERSACIÓN</a>
+                    <a href="{% if datos_pago.whatsapp %}{{ datos_pago.whatsapp }}{% elif datos_pago.numero_whatsapp %}{{ datos_pago.numero_whatsapp }}{% elif datos_pago.link_whatsapp %}{{ datos_pago.link_whatsapp }}{% else %}https://wa.me/qr/3IVZAOZFHIGEF1{% endif %}" target="_blank" class="tpl-card-btn">INICIAR CONVERSACIÓN</a>
                 {% else %}
                     <p>El administrador aún no ha agregado un número de WhatsApp.</p>
                 {% endif %}
@@ -44,4 +44,6 @@
 </section>
 
 {% endblock %}
+
+
 
